@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "incremental": true,
+    "declaration": true,
+    "sourceMap": true,
+    "declarationMap": true,
+    "importHelpers": true,
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "strict": true,
+    "target": "ES2018",
+    "outDir": "dist",
+    "rootDir": "src"
+  },
+  "include": ["src"],
+  "exclude": ["src/**/*.spec.ts"]
+}
