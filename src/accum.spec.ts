@@ -1,29 +1,27 @@
 import { Stream } from "xstream";
-import { get } from "svelte/store";
 import { accumRC } from "./accum";
-import { noop } from "./utils/noop";
 import { delay } from "./utils/delay";
+import { expectValues, expectValuesAfter } from "./utils/expect-values";
+
 
 describe("accum", () => {
   describe("accumRC", () => {
-    it("sync case", () => {
-      const stream = Stream.of(1);
-      const behaviour = accumRC(stream, 0);
-      const value = get(behaviour);
-      expect(value).toEqual(1);
+    it("should get initial value for empty stream", () => {
+      const stream = Stream.never<number>();
+      const behaviour = accumRC<number>(stream, 0);
+      expectValues<number>(behaviour, [0]);
     });
 
-    it("async case", async () => {
-      const stream = Stream.fromPromise(delay(10).then(() => 1));
-      const behaviour = accumRC(stream, 0);
-      // need sub to keep stream running
-      const unsub = behaviour.subscribe(noop);
-      const value = get(behaviour);
-      expect(value).toEqual(0);
-      await delay(10);
-      const newValue = get(behaviour);
-      expect(newValue).toEqual(1);
-      unsub();
+    it("should get immediately value from synchronous stream", () => {
+      const stream = Stream.of<number>(1);
+      const behaviour = accumRC<number>(stream, 0);
+      expectValues<number>(behaviour, [1]);
+    });
+
+    it("should get initial value and delayed from async stream", async () => {
+      const stream = Stream.fromPromise<number>(delay(10).then(() => 1));
+      const behaviour = accumRC<number>(stream, 0);
+      expectValuesAfter(behaviour, [0, 1], 10);
     });
   });
 });
