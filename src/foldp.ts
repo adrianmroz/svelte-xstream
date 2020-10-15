@@ -38,9 +38,3 @@ export function foldpAuto<S, T>(stream: Stream<S>, reducer: (acc: T, next: S) =>
   onDestroy(() => store.destroy());
   return store;
 }
-
-
-
-
-
-
