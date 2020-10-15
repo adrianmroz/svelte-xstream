@@ -3,7 +3,6 @@ import { accumRC } from "./accum";
 import { delay } from "./utils/delay";
 import { expectValues, expectValuesAfter } from "./utils/expect-values";
 
-
 describe("accum", () => {
   describe("accumRC", () => {
     it("should get initial value for empty stream", () => {
