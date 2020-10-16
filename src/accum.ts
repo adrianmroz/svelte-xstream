@@ -5,23 +5,15 @@ import { ManualStore } from "./manual-store";
 
 export function accumRC<T>(stream: Stream<T>, init: T): Readable<T> {
   return readable(init, set => {
-    const sub = stream.subscribe({
-      next: value => {
-        set(value);
-      }
-    });
-    return () => sub.unsubscribe();
+    const subscription = stream.subscribe({ next: set });
+    return () => subscription.unsubscribe();
   });
 }
 
 export function accumManual<T>(stream: Stream<T>, init: T): ManualStore<T> {
   const { set, subscribe } = writable<T>(init);
-  const sub = stream.subscribe({
-    next: value => {
-      set(value);
-    }
-  });
-  const destroy = () => sub.unsubscribe();
+  const subscription = stream.subscribe({ next: set });
+  const destroy = () => subscription.unsubscribe();
 
   return {
     subscribe,

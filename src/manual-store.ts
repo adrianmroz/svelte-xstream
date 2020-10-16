@@ -1,3 +1,10 @@
 import { Readable } from "svelte/store";
 
-export type ManualStore<T, S extends Readable<T> = Readable<T>> = S & { destroy: () => void };
+interface HasDestroy {
+  destroy: () => void;
+}
+
+export type ManualStore<
+  T,
+  Store extends Readable<T> = Readable<T>
+  > = Store & HasDestroy;

@@ -6,26 +6,26 @@ import { ManualStore } from "./manual-store";
 export function foldpRC<S, T>(stream: Stream<S>, reducer: (acc: T, next: S) => T, init: T): Readable<T> {
   let lastValue: T = init;
   return readable<T>(init, set => {
-    const sub = stream.subscribe({
+    const subscription = stream.subscribe({
       next: value => {
         lastValue = reducer(lastValue, value);
         set(lastValue);
       }
     });
-    return () => sub.unsubscribe();
+    return () => subscription.unsubscribe();
   });
 }
 
 export function foldpManual<S, T>(stream: Stream<S>, reducer: (acc: T, next: S) => T, init: T): ManualStore<T> {
   let lastValue: T = init;
   const { set, subscribe } = writable<T>(init);
-  const sub = stream.subscribe({
+  const subscription = stream.subscribe({
     next: value => {
         lastValue = reducer(lastValue, value);
         set(lastValue);
     }
   });
-  const destroy = () => sub.unsubscribe();
+  const destroy = () => subscription.unsubscribe();
 
   return {
     subscribe,
