@@ -3,3 +3,7 @@ export function delay(ms: number): Promise<void> {
     setTimeout(resolve, ms);
   });
 }
+
+export function doAfter(ms: number, f: () => void) {
+  delay(ms).then(f);
+}

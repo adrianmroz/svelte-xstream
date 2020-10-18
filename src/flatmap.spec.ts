@@ -1,12 +1,8 @@
 import { Stream } from "xstream";
 import { writable } from "svelte/store";
 import { flatmapRC } from "./flatmap";
-import { delay } from "./utils/delay";
+import { delay, doAfter } from "./utils/delay";
 import { waitAndExpectValuesInStore } from "./utils/expect-values";
-
-function doAfter(ms: number, f: () => void) {
-  delay(ms).then(f);
-}
 
 const delayedToFixed = (x: number) =>
   Stream.fromPromise<string>(delay(100).then(() => x.toFixed(2)));
