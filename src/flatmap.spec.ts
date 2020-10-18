@@ -9,10 +9,7 @@ function doAfter(ms: number, f: () => void) {
 }
 
 const delayedToFixed = (x: number) =>
-        Stream.fromPromise<string>(
-          delay(100)
-            .then(() => x.toFixed(2)));
-      
+  Stream.fromPromise<string>(delay(100).then(() => x.toFixed(2)));
 
 describe("flatmap", () => {
   describe("flatmapRC", () => {

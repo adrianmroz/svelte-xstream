@@ -8,9 +8,9 @@ export function flatmapRC<S, T>(
   f: (x: T) => Stream<S>,
   init: S
 ): Readable<S> {
-  return readable(init, set => {
+  return readable(init, (set) => {
     let innerSub: Subscription;
-    const unsub = store.subscribe(x => {
+    const unsub = store.subscribe((x) => {
       const stream = f(x);
       if (innerSub) innerSub.unsubscribe();
       innerSub = stream.subscribe({ next: set });
@@ -29,7 +29,7 @@ export function flatmapManual<S, T>(
 ): ManualStore<S> {
   const { set, subscribe } = writable(init);
   let innerSub: Subscription;
-  const unsubscribe = store.subscribe(x => {
+  const unsubscribe = store.subscribe((x) => {
     const stream = f(x);
     if (innerSub) innerSub.unsubscribe();
     innerSub = stream.subscribe({ next: set });
@@ -42,7 +42,7 @@ export function flatmapManual<S, T>(
 
   return {
     subscribe,
-    destroy
+    destroy,
   };
 }
 
