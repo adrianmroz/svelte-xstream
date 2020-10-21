@@ -1,3 +1,4 @@
+import { Stream } from "xstream";
 import { Readable } from "svelte/store";
 import { delay } from "./delay";
 
@@ -24,4 +25,24 @@ export async function waitAndExpectValuesInStore<T>(
   await delay(ms);
   unsub();
   expect(result).toEqual(expected);
+}
+
+export function expectValuesInStream<T>(
+  stream: Stream<T>,
+  values: T[],
+  done: Function
+) {
+  let expected = values.slice();
+  stream.addListener({
+    next(x: T) {
+      expect(x).toBe(expected.shift());
+    },
+    error(err: unknown) {
+      done(err);
+    },
+    complete() {
+      expect(expected.length).toBe(0);
+      done();
+    },
+  });
 }
