@@ -1,7 +1,10 @@
 import { Stream } from "xstream";
 import { accumRC } from "./accum";
 import { delay } from "./utils/delay";
-import { expectValuesInStore, waitAndExpectValuesInStore } from "./utils/expect-values";
+import {
+  expectValuesInStore,
+  waitAndExpectValuesInStore,
+} from "./utils/expect-values";
 
 describe("accum", () => {
   describe("accumRC", () => {

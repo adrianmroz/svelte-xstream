@@ -4,7 +4,7 @@ import { onDestroy } from "svelte";
 import { ManualStore } from "./manual-store";
 
 export function accumRC<T>(stream: Stream<T>, init: T): Readable<T> {
-  return readable(init, set => {
+  return readable(init, (set) => {
     const subscription = stream.subscribe({ next: set });
     return () => subscription.unsubscribe();
   });
@@ -17,7 +17,7 @@ export function accumManual<T>(stream: Stream<T>, init: T): ManualStore<T> {
 
   return {
     subscribe,
-    destroy
+    destroy,
   };
 }
 
