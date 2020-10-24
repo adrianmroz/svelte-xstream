@@ -4,7 +4,7 @@ import { doAfter } from "./utils/delay";
 import { expectValuesInStream } from "./utils/expect-values";
 
 describe("toStream", () => {
-  it("should emit same events as store", done => {
+  it("should emit same events as store", (done) => {
     const { set, ...readable } = writable(0);
     const stream = toStream(readable);
 
