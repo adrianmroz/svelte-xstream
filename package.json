@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "lint": "prettier --check src/*",
     "test:dev": "jest --watchAll",
     "dev": "tsc --build --watch",
     "build": "tsc"
