@@ -7,15 +7,15 @@ export function switchMap<S, T>(
   init: S
 ): Readable<S> {
   return readable(init, (set) => {
-    let innerSub: Subscription;
-    const unsub = store.subscribe((x) => {
+    let innerSubscription: Subscription;
+    const unsubscribe = store.subscribe((x) => {
       const stream = f(x);
-      if (innerSub) innerSub.unsubscribe();
-      innerSub = stream.subscribe({ next: set });
+      if (innerSubscription) innerSubscription.unsubscribe();
+      innerSubscription = stream.subscribe({ next: set });
     });
     return () => {
-      if (innerSub) innerSub.unsubscribe();
-      unsub();
+      if (innerSubscription) innerSubscription.unsubscribe();
+      unsubscribe();
     };
   });
 }
