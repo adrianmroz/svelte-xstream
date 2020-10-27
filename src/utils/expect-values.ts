@@ -12,7 +12,7 @@ export function expectValuesInStore<T>(store: Readable<T>, expected: T[]) {
   let result: T[] = [];
   const unsub = collect(store, result);
   unsub();
-  expect(result).toEqual(expected);
+  expect(result).toStrictEqual(expected);
 }
 
 export async function waitAndExpectValuesInStore<T>(
@@ -24,7 +24,7 @@ export async function waitAndExpectValuesInStore<T>(
   const unsub = collect(store, result);
   await delay(ms);
   unsub();
-  expect(result).toEqual(expected);
+  expect(result).toStrictEqual(expected);
 }
 
 export function expectValuesInStream<T>(
@@ -35,7 +35,7 @@ export function expectValuesInStream<T>(
   let expected = values.slice();
   stream.addListener({
     next(x: T) {
-      expect(x).toBe(expected.shift());
+      expect(x).toStrictEqual(expected.shift());
     },
     error(err: unknown) {
       done(err);
