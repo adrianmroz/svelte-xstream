@@ -29,4 +29,13 @@ describe("gate", () => {
 
     expectValuesInStream(result, [0, 1], done);
   });
+
+  it("should not pass any value till store value is false", (done) => {
+    const values = Stream.periodic(10).take(4);
+    const conditions = writable(false);
+    doAfter(25, () => conditions.set(true));
+    const result = gate(conditions, values);
+
+    expectValuesInStream(result, [2, 3], done);
+  });
 });
