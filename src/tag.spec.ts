@@ -4,7 +4,7 @@ import { tag } from "./tag";
 import { doAfter } from "./utils/delay";
 import { expectValuesInStream } from "./utils/expect-values";
 
-describe("gate", () => {
+describe("tag", () => {
   it("should sample value from store", (done) => {
     const events = Stream.periodic(10).take(4);
     const values = writable(42);

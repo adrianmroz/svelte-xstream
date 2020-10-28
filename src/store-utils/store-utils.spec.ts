@@ -18,11 +18,11 @@ describe("store-utils", () => {
   describe("map", () => {
     const double = (i: number) => i * 2;
 
-    it("should map all values with function", () => {
+    it("should map all values with function", (done) => {
       const values = writable(1);
       const result = map(values, double);
       doAfter(10, () => values.set(2));
-      waitAndExpectValuesInStore(20, result, [2, 4]);
+      waitAndExpectValuesInStore(20, result, [2, 4], done);
     });
   });
 
@@ -37,7 +37,7 @@ describe("store-utils", () => {
       expectValuesInStore(result, [[1, "a"]]);
     });
 
-    it("should zip current values from stores", () => {
+    it("should zip current values from stores", (done) => {
       const numbers = writable(1);
       const strings = writable("a");
       const result = zip(numbers, strings, tuple);
@@ -53,7 +53,7 @@ describe("store-utils", () => {
         [3, "b"],
       ];
 
-      waitAndExpectValuesInStore(50, result, expected);
+      waitAndExpectValuesInStore(50, result, expected, done);
     });
   });
 });

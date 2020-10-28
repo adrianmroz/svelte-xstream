@@ -18,13 +18,15 @@ export function expectValuesInStore<T>(store: Readable<T>, expected: T[]) {
 export async function waitAndExpectValuesInStore<T>(
   ms: number,
   store: Readable<T>,
-  expected: T[]
+  expected: T[],
+  done: Function
 ) {
   let result: T[] = [];
   const unsub = collect(store, result);
   await delay(ms);
   unsub();
   expect(result).toStrictEqual(expected);
+  done();
 }
 
 export function expectValuesInStream<T>(

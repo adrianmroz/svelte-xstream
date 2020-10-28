@@ -20,10 +20,10 @@ describe("accum", () => {
       expectValuesInStore<number>(behaviour, [1]);
     });
 
-    it("should get initial value and delayed from async stream", async () => {
+    it("should get initial value and delayed from async stream", (done) => {
       const stream = Stream.fromPromise<number>(delay(10).then(() => 1));
       const behaviour = accumRC<number>(stream, 0);
-      waitAndExpectValuesInStore(10, behaviour, [0, 1]);
+      waitAndExpectValuesInStore(10, behaviour, [0, 1], done);
     });
   });
 });
