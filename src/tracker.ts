@@ -4,7 +4,7 @@ export function tracker(
   eventType: string,
   options?: boolean | AddEventListenerOptions
 ) {
-  const stream: Stream<Event> = Stream.empty();
+  const stream: Stream<Event> = Stream.never();
 
   function tracker(node: HTMLElement) {
     const handler = (event: Event) => stream.shamefullySendNext(event);
