@@ -7,7 +7,7 @@ export function apply<S, T>(
   stream: Stream<S>
 ): Stream<T> {
   return stream.map((value) => {
-    const f = get(store);
+    const f = get<Unary<S, T>, Readable<Unary<S, T>>>(store);
     return f(value);
   });
 }

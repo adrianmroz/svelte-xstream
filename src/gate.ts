@@ -6,7 +6,7 @@ export function gate<T>(
   stream: Stream<T>
 ): Stream<T> {
   return stream.filter(() => {
-    const condition = get(store);
+    const condition = get<boolean, Readable<boolean>>(store);
     return condition;
   });
 }
