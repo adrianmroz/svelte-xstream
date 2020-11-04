@@ -1,8 +1,10 @@
 import { Stream } from "xstream";
 
+type Options = Parameters<typeof addEventListener>[2];
+
 export function tracker<K extends keyof HTMLElementEventMap>(
   eventType: K,
-  options?: boolean | AddEventListenerOptions
+  options: Options
 ) {
   const stream: Stream<Event> = Stream.never();
 
