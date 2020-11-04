@@ -5,7 +5,7 @@
     "sourceMap": true,
     "declarationMap": true,
     "importHelpers": true,
-    "module": "commonjs",
+    "module": "ES6",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "strict": true,
