@@ -9,3 +9,4 @@ export { apply } from "./apply";
 export { filterApply } from "./filter-apply";
 export { tag } from "./tag";
 export { flatMap, flatten, map, of, zip } from "./store-utils/store-utils";
+export { tracker } from "./tracker";
