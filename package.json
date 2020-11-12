@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/adrianmroz/svelte-xstream#readme",
   "dependencies": {
-    "svelte": "3.28.0",
+    "svelte": "3.29.0",
     "xstream": "11.13.0"
   },
   "devDependencies": {
