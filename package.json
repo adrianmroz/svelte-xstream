@@ -2,7 +2,11 @@
   "name": "svelte-xstream",
   "version": "0.0.1",
   "description": "Utilities for working with xstream in svelte components",
-  "main": "index.js",
+  "exports": {
+    "import": "./dist/index.js"
+  },
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "test": "jest",
     "lint": "prettier --check src/*",
@@ -26,7 +30,7 @@
   },
   "homepage": "https://github.com/adrianmroz/svelte-xstream#readme",
   "dependencies": {
-    "svelte": "3.28.0",
+    "svelte": "3.29.0",
     "xstream": "11.13.0"
   },
   "devDependencies": {

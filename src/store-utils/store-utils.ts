@@ -18,7 +18,8 @@ export function of<T>(value: T): Readable<T> {
 }
 
 export function flatten<T>(store: Readable<Readable<T>>): Readable<T> {
-  const init = get(get(store));
+  const innerStore = get<Readable<T>, Readable<Readable<T>>>(store);
+  const init = get<T, Readable<T>>(innerStore);
   return readable(init, (set) => {
     let innerUnsubscribe: EmptyFn | null = null;
     const unsubscribe = store.subscribe((innerStore) => {
@@ -36,8 +37,8 @@ export function flatMap<S, T>(
   store: Readable<S>,
   f: Unary<S, Readable<T>>
 ): Readable<T> {
-  const firstValue: S = get(store);
-  const init: T = get(f(firstValue));
+  const firstValue = get<S, Readable<S>>(store);
+  const init = get<T, Readable<T>>(f(firstValue));
   return readable(init, (set) => {
     let innerUnsubscribe: EmptyFn | null = null;
     const unsubscribe = store.subscribe((value) => {

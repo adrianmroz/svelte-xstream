@@ -6,7 +6,7 @@ export function attach<S, T>(
   stream: Stream<T>
 ): Stream<[S, T]> {
   return stream.map((eventValue) => {
-    const storeValue = get(store);
+    const storeValue = get<S, Readable<S>>(store);
     return [storeValue, eventValue];
   });
 }
