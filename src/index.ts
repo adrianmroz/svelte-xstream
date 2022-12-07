@@ -8,6 +8,7 @@ export { gate } from "./gate";
 export { apply } from "./apply";
 export { filterApply } from "./filter-apply";
 export { tag } from "./tag";
+export { attach } from "./attach";
 export { flatMap, flatten, map, of, zip } from "./store-utils/store-utils";
 export { runEffect } from "./run-effect";
 export { tracker } from "./tracker";
